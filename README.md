@@ -32,3 +32,9 @@ artisan migrate
 # node pacekage install
 npm install
 ```
+
+### 사용  
+```sh
+# 프론트엔드 변경 감지
+npm run watch
+```
