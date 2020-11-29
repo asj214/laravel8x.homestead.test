@@ -6,10 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use App\Models\User;
 
 
 class AuthController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => ['login', 'register']]);
+    }
     //
     public function register(Request $request){
 
@@ -21,16 +28,54 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             //
-            return response()->json(['error' => '..']);
+            return response()->json(['error' => 'Something is wrong with Your Request']);
         }
 
         $user = new User;
         $user->email = $request->email;
         $user->name = $request->name;
-        $user->password = bcrypt($request->password);
         $user->password = Hash::make($request->password);
         $user->save();
 
+        return response([
+            'status' => 'Ok',
+            'data' => $user
+        ], 200);
+
+    }
+
+    public function login(Request $request){
+
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:4'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        $token_name = $user->id.$user->email;
+
+        return response([
+            'status' => 'Ok',
+            'access_token' => $user->createToken($token_name)->plainTextToken,
+            'token_type' => 'bearer',
+        ], 200);
+
+    }
+
+    public function logout(Request $request){
+        $request->user()->tokens()->delete();
+        // $request->user()->currentAccessToken()->delete();
+        // auth()->user()->id
+        return response([
+            'status' => 'Ok'
+        ], 200);
     }
 
 }
