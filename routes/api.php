@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PostController;
 
 
 /*
@@ -25,4 +26,14 @@ Route::prefix('auth')->group(function(){
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
     Route::get('logout', [AuthController::class, 'logout']);
+});
+
+// Route::middleware('auth:sanctum')
+
+Route::group(['middleware' => 'auth:sanctum'], function ($router) {
+    Route::get('post', [PostController::class, 'index']);
+    Route::post('post', [PostController::class, 'store']);
+    Route::get('post/{id}', [PostController::class, 'show']);
+    Route::put('post/{id}', [PostController::class, 'update']);
+    Route::delete('post/{id}', [PostController::class, 'destroy']);
 });
