@@ -15,7 +15,6 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
-
                     <li class="nav-item">
                         <router-link :to="{ name: 'login' }" class="nav-link">Login</router-link>
                     </li>
