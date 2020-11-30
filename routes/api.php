@@ -28,8 +28,6 @@ Route::prefix('auth')->group(function(){
     Route::get('logout', [AuthController::class, 'logout']);
 });
 
-// Route::middleware('auth:sanctum')
-
 Route::group(['middleware' => 'auth:sanctum'], function ($router) {
     Route::get('post', [PostController::class, 'index']);
     Route::post('post', [PostController::class, 'store']);
