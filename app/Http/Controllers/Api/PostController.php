@@ -11,7 +11,8 @@ class PostController extends ApiController
 {
     //
     public function index(){
-
+        $posts = Post::paginate(15);
+        return $this->respond($posts);
     }
 
     public function store(Request $request){
@@ -31,7 +32,7 @@ class PostController extends ApiController
         $post->user_id = auth()->user()->id;
         $post->save();
 
-        return $this->respond($post);
+        return $this->respondCreated($post);
 
     }
 
