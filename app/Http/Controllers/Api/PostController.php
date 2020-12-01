@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use App\Models\Post;
 
 
-class PostController extends Controller
+class PostController extends ApiController
 {
     //
     public function index(){
@@ -24,10 +22,7 @@ class PostController extends Controller
             'body' => ['required', 'string', 'min:4'],
         ]);
 
-        if ($validator->fails()) {
-            //
-            return response()->json(['error' => 'Invalide Request Params']);
-        }
+        if ($validator->fails()) return $this->respondError($validator->errors(), 400);
 
         $post = new Post;
         $post->category_id = $request->category_id;
@@ -36,15 +31,12 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->save();
 
+        return $this->respond($post);
+
     }
 
     public function show($id){
-
-        return response([
-            'status' => 'Ok',
-            'post' => Post::find($id)
-        ], 200);
-
+        return $this->respond(Post::find($id));
     }
 
     public function update(Request $request, $id){
@@ -55,10 +47,7 @@ class PostController extends Controller
             'body' => ['required', 'string', 'min:4'],
         ]);
 
-        if ($validator->fails()) {
-            //
-            return response()->json(['error' => 'Invalide Request Params']);
-        }
+        if ($validator->fails()) return $this->respondError($validator->errors(), 400);
 
         $post = Post::find($id);
         $post->category_id = $request->category_id;
@@ -67,6 +56,7 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->save();
 
+        return $this->respond($post);
     }
 
     public function destroy($id){
