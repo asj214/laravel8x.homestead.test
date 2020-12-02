@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Transformers\PostTransformer;
 use App\Models\Post;
 
 
@@ -13,7 +14,7 @@ class PostController extends Controller
     //
     public function index(){
         $posts = Post::paginate(15);
-        return respond($posts);
+        return respond(collection($posts, PostTransformer::class, 'posts'));
     }
 
     public function store(Request $request){

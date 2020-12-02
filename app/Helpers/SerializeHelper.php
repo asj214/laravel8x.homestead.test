@@ -1,6 +1,6 @@
 <?php
 
-function collection($model, $transformer = false) {
+function collection($model, $transformer = false, $key = 'data') {
 
     if (false === $transformer) {
         $transformer = function($model) { return $model; };
@@ -11,14 +11,15 @@ function collection($model, $transformer = false) {
     }
 
     $manager = new \League\Fractal\Manager();
-    $collect = new \League\Fractal\Resource\Collection($model->getCollection(), $transformer);
+    $manager->setSerializer(new App\Transformers\ExportSerializer());
+    $collect = new \League\Fractal\Resource\Collection($model->getCollection(), $transformer, $key);
     $resource = $collect->setPaginator(new \League\Fractal\Pagination\IlluminatePaginatorAdapter($model));
 
     return $manager->createData($resource)->toArray();
 
 }
 
-function item($model, $transformer = false) {
+function item($model, $transformer = false, $key = 'data') {
 
     if (false === $transformer) {
         $transformer = function($model) { return $model; };
@@ -34,6 +35,8 @@ function item($model, $transformer = false) {
     // }
 
     $manager = new \League\Fractal\Manager();
+    // $manager->setSerializer(new App\Transformers\ExportSerializer());
+
     $resource = new \League\Fractal\Resource\Item($model, $transformer);
 
     return $manager->createData($resource)->toArray();
