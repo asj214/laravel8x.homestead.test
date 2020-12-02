@@ -11,7 +11,7 @@ function collection($model, $transformer = false, $key = 'data') {
     }
 
     $manager = new \League\Fractal\Manager();
-    $manager->setSerializer(new App\Transformers\ExportSerializer());
+    $manager->setSerializer(new App\Transformers\ExtentionSerializer());
     $collect = new \League\Fractal\Resource\Collection($model->getCollection(), $transformer, $key);
     $resource = $collect->setPaginator(new \League\Fractal\Pagination\IlluminatePaginatorAdapter($model));
 

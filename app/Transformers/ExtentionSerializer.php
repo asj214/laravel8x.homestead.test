@@ -2,10 +2,9 @@
 namespace App\Transformers;
 
 use League\Fractal\Serializer\ArraySerializer;
-use League\Fractal\Serializer\DataArraySerializer;
 
 
-class ExportSerializer extends ArraySerializer {
+class ExtentionSerializer extends ArraySerializer {
 
     public function collection($resourceKey, array $data)
     {

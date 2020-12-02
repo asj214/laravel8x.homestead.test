@@ -12,8 +12,8 @@
 
 ### 주요 패키지  
 - [sanctum](https://laravel.kr/docs/8.x/sanctum)
+- [fractal](https://packagist.org/packages/league/fractal)  
 - [laravel/ui](https://github.com/laravel/ui)
-
 
 ### 설치  
 ```sh
