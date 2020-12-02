@@ -93,6 +93,7 @@ Authorization: Bearer {{access_token}}
 
 ### 
 # comment.create
+# @name comment
 POST {{BASE_URL}}/post/{{post_id}}/comment
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
@@ -100,3 +101,12 @@ Authorization: Bearer {{access_token}}
 {
     "body": "my comment style is short!"
 }
+
+###
+@comment_id = {{comment.response.body.post.comments[0].id}}
+
+### 
+# comment.destroy
+DELETE {{BASE_URL}}/post/{{post_id}}/comment/{{comment_id}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}

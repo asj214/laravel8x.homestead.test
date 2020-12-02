@@ -108,4 +108,19 @@ class PostController extends Controller
 
     }
 
+    public function comment_destroy($id, $comment_id) {
+
+        $post = Post::find($id);
+        $comment = Comment::find($comment_id);
+
+        if (!$post || !$comment) return respond_forbidden();
+        if ($comment->user_id != auth()->user()->id) return respond_unauthorized();
+
+        $comment->delete();
+        $post->decrement('comments_count');
+
+        return respond(item($post, $this->transform, 'post'));
+
+    }
+
 }
