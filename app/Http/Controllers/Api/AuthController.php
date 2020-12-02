@@ -6,15 +6,24 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Item;
+use App\Transform\UserTransform;
 use App\Models\User;
 
 
 class AuthController extends Controller
 {
 
-    public function __construct()
+    private $fractal;
+    private $transform;
+
+    public function __construct(Manager $fractal, UserTransform $userTransform)
     {
         $this->middleware('auth:sanctum', ['except' => ['login', 'register']]);
+
+        $this->fractal = $fractal;
+        $this->transform = $userTransform;
     }
     //
     public function register(Request $request){
@@ -72,7 +81,9 @@ class AuthController extends Controller
     }
 
     public function me(Request $request){
-        return respond(User::find($request->user()->id));
+        $user = User::find($request->user()->id);
+        $user = new Item($user, $this->transform);
+        return respond($this->fractal->createData($user)->toArray());
     }
 
 }
