@@ -33,7 +33,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return respond($user);
+        return respond_success();
 
     }
 
@@ -71,8 +71,8 @@ class AuthController extends Controller
         return respond_success();
     }
 
-    public function me(){
-        return respond(['message' => 'hello Helper']);
+    public function me(Request $request){
+        return respond(User::find($request->user()->id));
     }
 
 }
