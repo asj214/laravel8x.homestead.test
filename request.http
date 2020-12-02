@@ -46,7 +46,7 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {
-    "page": 1
+    "page": 2
 }
 
 ###
@@ -63,7 +63,7 @@ Authorization: Bearer {{access_token}}
 }
 
 ###
-@post_id = {{post.response.body.id}}
+@post_id = {{post.response.body.post.id}}
 
 ### 
 # post.show

@@ -35,9 +35,8 @@ function item($model, $transformer = false, $key = 'data') {
     // }
 
     $manager = new \League\Fractal\Manager();
-    // $manager->setSerializer(new App\Transformers\ExportSerializer());
-
-    $resource = new \League\Fractal\Resource\Item($model, $transformer);
+    $manager->setSerializer(new App\Transformers\ExtentionSerializer());
+    $resource = new \League\Fractal\Resource\Item($model, $transformer, $key);
 
     return $manager->createData($resource)->toArray();
 

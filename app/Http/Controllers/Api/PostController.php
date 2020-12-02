@@ -11,10 +11,12 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    private $transform = PostTransformer::class;
+
     //
     public function index(){
         $posts = Post::paginate(15);
-        return respond(collection($posts, PostTransformer::class, 'posts'));
+        return respond(collection($posts, $this->transform, 'posts'));
     }
 
     public function store(Request $request){
@@ -34,12 +36,12 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->save();
 
-        return respond_created($post);
+        return respond_created(item($post, $this->transform, 'post'));
 
     }
 
     public function show($id){
-        return respond(Post::find($id));
+        return respond(item(Post::find($id), $this->transform, 'post'));
     }
 
     public function update(Request $request, $id){
@@ -59,7 +61,7 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->save();
 
-        return respond($post);
+        return respond(item(Post::find($id), $this->transform, 'post'));
     }
 
     public function destroy($id){
