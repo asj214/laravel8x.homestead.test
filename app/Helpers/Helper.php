@@ -1,8 +1,7 @@
 <?php
-if (!function_exists('respond')) {
-    function respond($data, $status = 200, $headers = []) {
-        return response()->json($data, $status, $headers);
-    }
+
+function respond($data, $status = 200, $headers = []) {
+    return response()->json($data, $status, $headers);
 }
 
 function respond_success() {
