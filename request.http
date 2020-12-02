@@ -89,3 +89,14 @@ Authorization: Bearer {{access_token}}
 DELETE {{BASE_URL}}/post/{{post_id}}
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
+
+
+### 
+# comment.create
+POST {{BASE_URL}}/post/{{post_id}}/comment
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "body": "my comment style is short!"
+}

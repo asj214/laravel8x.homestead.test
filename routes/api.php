@@ -30,9 +30,15 @@ Route::prefix('auth')->group(function(){
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function ($router) {
+    # post
     Route::get('post', [PostController::class, 'index']);
     Route::post('post', [PostController::class, 'store']);
     Route::get('post/{id}', [PostController::class, 'show']);
     Route::put('post/{id}', [PostController::class, 'update']);
     Route::delete('post/{id}', [PostController::class, 'destroy']);
+
+    # comment
+    Route::post('post/{id}/comment', [PostController::class, 'comment_store']);
+    // Route::delete('post/{id}/comment', [PostController::class, 'comment_destroy']);
+
 });

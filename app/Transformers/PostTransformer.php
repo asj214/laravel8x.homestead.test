@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 class PostTransformer extends TransformerAbstract
 {
 
-    protected $defaultIncludes = ['user'];
+    protected $defaultIncludes = ['user', 'comments'];
     protected $availableIncludes = [];
 
     public function transform(Post $post) {
@@ -18,6 +18,8 @@ class PostTransformer extends TransformerAbstract
             'user' => null,
             'title' => $post->title,
             'body' => $post->body,
+            'comments_count'=> $post->comments_count,
+            'comments' => null,
             'created_at' => $post->created_at,
             'updated_at' => $post->updated_at
         ];
@@ -25,6 +27,10 @@ class PostTransformer extends TransformerAbstract
 
     public function includeUser(Post $post) {
         return $this->item($post->user, new UserTransformer);
+    }
+
+    public function includeComments(Post $post) {
+        return $this->collection($post->comments, new CommentTransformer);
     }
 
 }

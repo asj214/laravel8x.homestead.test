@@ -7,11 +7,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Transformers\PostTransformer;
 use App\Models\Post;
+use App\Models\Comment;
 
 
 class PostController extends Controller
 {
     private $transform = PostTransformer::class;
+
+    // public function __construct(){
+    //     $this->transform = PostTransformer::class;
+    // }
 
     //
     public function index(){
@@ -40,7 +45,7 @@ class PostController extends Controller
 
     }
 
-    public function show($id){
+    public function show($id) {
         return respond(item(Post::find($id), $this->transform, 'post'));
     }
 
@@ -73,6 +78,34 @@ class PostController extends Controller
         $post->delete();
 
         return respond_success();
+    }
+
+    public function comment_store(Request $request, $id) {
+
+        $validate = Validator::make($request->all(), [
+            'body' => ['required', 'string', 'min:4'],
+        ]);
+
+        if ($validate->fails()) return respond_invalid($validate->errors());
+
+        $post = Post::find($id);
+
+        if ($post) {
+            $comment = new Comment;
+            $comment->commentable_id = $id;
+            $comment->commentable_type = 'posts';
+            $comment->user_id = auth()->user()->id;
+            $comment->body = $request->body;
+            $comment->save();
+    
+            $post->increment('comments_count');
+
+            return respond(item($post, $this->transform, 'post'));
+
+        }
+
+        return respond_forbidden();
+
     }
 
 }
