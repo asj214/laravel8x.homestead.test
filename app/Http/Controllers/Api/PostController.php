@@ -21,19 +21,19 @@ class PostController extends Controller
 
     public function store(Request $request){
 
-        $validator = Validator::make($request->all(), [
+        $validate = Validator::make($request->all(), [
             'category_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'min:4'],
             'body' => ['required', 'string', 'min:4'],
         ]);
 
-        if ($validator->fails()) return respond_invalid($validator->errors());
+        if ($validate->fails()) return respond_invalid($validate->errors());
 
         $post = new Post;
         $post->category_id = $request->category_id;
+        $post->user_id = auth()->user()->id;
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->user_id = auth()->user()->id;
         $post->save();
 
         return respond_created(item($post, $this->transform, 'post'));
@@ -46,19 +46,19 @@ class PostController extends Controller
 
     public function update(Request $request, $id){
 
-        $validator = Validator::make($request->all(), [
+        $validate = Validator::make($request->all(), [
             'category_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'min:4'],
             'body' => ['required', 'string', 'min:4'],
         ]);
 
-        if ($validator->fails()) return respond_invalid($validator->errors());
+        if ($validate->fails()) return respond_invalid($validate->errors());
 
         $post = Post::find($id);
         $post->category_id = $request->category_id;
+        $post->user_id = auth()->user()->id;
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->user_id = auth()->user()->id;
         $post->save();
 
         return respond(item(Post::find($id), $this->transform, 'post'));
@@ -66,6 +66,13 @@ class PostController extends Controller
 
     public function destroy($id){
 
+        $post = Post::find($id);
+
+        if ($post->user_id != auth()->user()->id) return respond_unauthorized();
+
+        $post->delete();
+
+        return respond_success();
     }
 
 }

@@ -83,3 +83,9 @@ Authorization: Bearer {{access_token}}
     "title": "modify post",
     "body": "modify test"
 }
+
+###
+# post.delete
+DELETE {{BASE_URL}}/post/{{post_id}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
