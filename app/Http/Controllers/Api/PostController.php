@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Post;
 
 
-class PostController extends ApiController
+class PostController extends Controller
 {
     //
     public function index(){
         $posts = Post::paginate(15);
-        return $this->respond($posts);
+        return respond($posts);
     }
 
     public function store(Request $request){
@@ -23,7 +24,7 @@ class PostController extends ApiController
             'body' => ['required', 'string', 'min:4'],
         ]);
 
-        if ($validator->fails()) return $this->respondError($validator->errors(), 400);
+        if ($validator->fails()) return respond_invalid($validator->errors());
 
         $post = new Post;
         $post->category_id = $request->category_id;
@@ -32,12 +33,12 @@ class PostController extends ApiController
         $post->user_id = auth()->user()->id;
         $post->save();
 
-        return $this->respondCreated($post);
+        return respond_created($post);
 
     }
 
     public function show($id){
-        return $this->respond(Post::find($id));
+        return respond(Post::find($id));
     }
 
     public function update(Request $request, $id){
@@ -48,7 +49,7 @@ class PostController extends ApiController
             'body' => ['required', 'string', 'min:4'],
         ]);
 
-        if ($validator->fails()) return $this->respondError($validator->errors(), 400);
+        if ($validator->fails()) return respond_invalid($validator->errors());
 
         $post = Post::find($id);
         $post->category_id = $request->category_id;
@@ -57,7 +58,7 @@ class PostController extends ApiController
         $post->user_id = auth()->user()->id;
         $post->save();
 
-        return $this->respond($post);
+        return respond($post);
     }
 
     public function destroy($id){

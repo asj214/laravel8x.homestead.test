@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
 
-class AuthController extends ApiController
+class AuthController extends Controller
 {
 
     public function __construct()
@@ -24,7 +25,7 @@ class AuthController extends ApiController
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
 
-        if ($validator->fails()) return $this->respondError($validator->errors(), 400);
+        if ($validator->fails()) return respond_invalid($validator->errors());
 
         $user = new User;
         $user->email = $request->email;
@@ -32,7 +33,7 @@ class AuthController extends ApiController
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return $this->respond($user);
+        return respond($user);
 
     }
 
@@ -43,17 +44,17 @@ class AuthController extends ApiController
             'password' => ['required', 'string', 'min:4'],
         ]);
 
-        if ($validator->fails()) return $this->respondFailedLogin();
+        if ($validator->fails()) return respond_invalid($validator->errors());
 
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return $this->respondFailedLogin();
+            return respond_error('email or password is invalid');
         }
 
         $token_name = $user->id.$user->email;
 
-        return $this->respond([
+        return respond([
             'access_token' => $user->createToken($token_name)->plainTextToken,
             'token_type' => 'bearer'
         ]);
@@ -67,7 +68,11 @@ class AuthController extends ApiController
         // $request->user()->currentAccessToken()->delete();
         # 유저 정보 확인
         // auth()->user()->id
-        return $this->respondSuccess();
+        return respond_success();
+    }
+
+    public function me(){
+        return respond(['message' => 'hello Helper']);
     }
 
 }

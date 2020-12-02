@@ -1,0 +1,85 @@
+@BASE_URL = http://laravel8x.homestead.test/api
+
+###
+# auth.register
+POST {{BASE_URL}}/auth/register
+Content-Type: application/json
+
+{
+    "name": "tester",
+    "email": "abc123@abc.com",
+    "password": "12345678aa",
+    "password_confirmation": "12345678aa"
+}
+
+###
+# @name login
+POST {{BASE_URL}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "abc123@abc.com",
+    "password": "12345678aa"
+}
+
+###
+@access_token = {{login.response.body.access_token}}
+
+###
+# auth.me
+GET {{BASE_URL}}/auth/me
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+# auth.logout
+GET {{BASE_URL}}/auth/logout
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+# post.index
+GET {{BASE_URL}}/post
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "page": 1
+}
+
+###
+# post.store
+# @name post
+POST {{BASE_URL}}/post
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "category_id": 1,
+    "title": "hello helper article",
+    "body": "test write"
+}
+
+###
+@post_id = {{post.response.body.id}}
+
+### 
+# post.show
+GET {{BASE_URL}}/post/{{post_id}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+# post.update
+PUT {{BASE_URL}}/post/{{post_id}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "category_id": 1,
+    "title": "modify post",
+    "body": "modify test"
+}
