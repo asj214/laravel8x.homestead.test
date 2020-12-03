@@ -63,12 +63,16 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
+
         # 해당 유저의 전체 토큰 삭제
-        $request->user()->tokens()->delete();
-        # 접속한 토큰만 삭제
-        // $request->user()->currentAccessToken()->delete();
+        // $request->user()->tokens()->delete();
+
+        # 접속한 토큰만 삭제 (다양한 디바이스에서 접속 시를 생각해보니 이게 맞는듯...)
+        $request->user()->currentAccessToken()->delete();
+
         # 유저 정보 확인
         // auth()->user()->id
+
         return respond_success();
     }
 

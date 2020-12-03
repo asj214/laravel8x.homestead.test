@@ -18,7 +18,7 @@ class PostTransformer extends TransformerAbstract
             'user' => null,
             'title' => $post->title,
             'body' => $post->body,
-            'comments_count'=> $post->comments_count,
+            'comments_count'=> (int) ($post->comments_count == null ? 0 : $post->comments_count),
             'comments' => null,
             'created_at' => $post->created_at,
             'updated_at' => $post->updated_at

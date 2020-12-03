@@ -14,11 +14,6 @@ class PostController extends Controller
 {
     private $transform = PostTransformer::class;
 
-    // public function __construct(){
-    //     $this->transform = PostTransformer::class;
-    // }
-
-    //
     public function index(){
         $posts = Post::paginate(15);
         return respond(collection($posts, $this->transform, 'posts'));
