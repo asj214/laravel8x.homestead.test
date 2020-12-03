@@ -110,3 +110,16 @@ Authorization: Bearer {{access_token}}
 DELETE {{BASE_URL}}/post/{{post_id}}/comment/{{comment_id}}
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
+
+
+###
+# attachment.store
+POST {{BASE_URL}}/attachment
+Content-Type: multipart/form-data
+Authorization: Bearer {{access_token}}
+
+
+{
+    "attachment_type": "posts",
+    "attachment_id": {{post_id}}
+}

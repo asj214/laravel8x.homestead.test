@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PostController;
-
+use App\Http\Controllers\Api\AttachmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,5 +40,8 @@ Route::group(['middleware' => 'auth:sanctum'], function ($router) {
     # comment
     Route::post('post/{id}/comment', [PostController::class, 'comment_store']);
     Route::delete('post/{id}/comment/{comment_id}', [PostController::class, 'comment_destroy']);
+
+    # attachment
+    Route::post('attachment', [AttachmentController::class, 'store']);
 
 });

@@ -1,7 +1,9 @@
 <?php
 
 function respond($data, $status = 200, $headers = []) {
-    return response()->json($data, $status, $headers);
+    $append = ($data == null) ? [] : $data;
+    $result = array_merge(['status' => $status], $append);
+    return response()->json($result, $status, $headers);
 }
 
 function respond_success() {
@@ -19,8 +21,7 @@ function respond_no_content() {
 function respond_error($message, $status) {
     return respond([
         'errors' => [
-            'message' => $message,
-            'status_code' => $status
+            'message' => $message
         ]
     ], $status);
 }

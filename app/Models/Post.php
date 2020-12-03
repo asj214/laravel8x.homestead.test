@@ -13,15 +13,15 @@ class Post extends Model
 
     protected $table = "posts";
     protected $dates = ['deleted_at'];
-    protected $with = ['user', 'comments'];
+    protected $with = ['user', 'comments', 'attachments'];
 
     protected $fillable = [
         'category_id', 'user_id', 'title', 'body', 'comments_count'
     ];
 
-    // public function attachments(){
-    //     return $this->hasMany(Attachment::class, 'attachment_id')->where('attachment_type', 'posts')->orderBy('id', 'asc');
-    // }
+    public function attachments(){
+        return $this->hasMany(Attachment::class, 'attachment_id')->where('attachment_type', 'posts')->orderBy('id', 'asc');
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
