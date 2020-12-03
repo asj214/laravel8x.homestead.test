@@ -77,8 +77,7 @@ class AuthController extends Controller
     }
 
     public function me(Request $request){
-        $user = User::find($request->user()->id);
-        return respond(item($user, UserTransformer::class, 'user'));
+        return respond(item($request->user(), UserTransformer::class, 'user'));
     }
 
 }
