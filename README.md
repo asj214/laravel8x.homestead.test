@@ -35,6 +35,9 @@ npm install
 
 ### 사용  
 ```sh
+# database query log (debug mode) .env APP_DEBUG == true
+tail -f storage/logs/laravel.log
+
 # 프론트엔드 변경 감지
 npm run watch
 ```
