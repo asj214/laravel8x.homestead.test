@@ -15,7 +15,7 @@ class AttachmentTransformer extends TransformerAbstract
             'attachment_type' => $attach->attachment_type,
             'attachment_id' => (int) $attach->attachment_id,
             'filename' => $attach->filename,
-            'url' => $attach->url,
+            'url' => asset($attach->url),
             'created_at' => $attach->created_at,
             'updated_at' => $attach->updated_at
         ];
