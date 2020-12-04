@@ -50,7 +50,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return respond_error('email or password is invalid');
+            return respond_error('email or password is invalid', 400);
         }
 
         $token_name = $user->id.$user->email;

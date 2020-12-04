@@ -4,16 +4,18 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PostFactory extends Factory
+
+class CommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Post::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -24,13 +26,16 @@ class PostFactory extends Factory
     {
 
         $user = User::inRandomOrder()->first();
+        $post = Post::inRandomOrder()->first();
+        $post->increment('comments_count');
 
         return [
             //
-            'category_id' => 1,
+            'commentable_id' => $post->id,
+            'commentable_type' => 'posts',
             'user_id' => $user->id,
-            'title' => $this->faker->text,
             'body' => $this->faker->text
         ];
+
     }
 }

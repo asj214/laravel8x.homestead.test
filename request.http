@@ -8,8 +8,8 @@ Content-Type: application/json
 {
     "name": "tester",
     "email": "abc123@abc.com",
-    "password": "12345678aa",
-    "password_confirmation": "12345678aa"
+    "password": "password",
+    "password_confirmation": "password"
 }
 
 ###
@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "email": "abc123@abc.com",
-    "password": "12345678aa"
+    "password": "password"
 }
 
 ###

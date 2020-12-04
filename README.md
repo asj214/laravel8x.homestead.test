@@ -38,6 +38,15 @@ npm install
 # database query log (debug mode) .env APP_DEBUG == true
 tail -f storage/logs/laravel.log
 
+# seed
+artisan db:seed
+
+# table refresh
+artisan migrate:refresh
+
+# table refresh + seeding
+artisan migrate:refresh --seed
+
 # 프론트엔드 변경 감지
 npm run watch
 ```
