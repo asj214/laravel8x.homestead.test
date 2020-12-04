@@ -63,8 +63,8 @@ Authorization: Bearer {{access_token}}
 }
 
 ###
-@post_id = {{post.response.body.post.id}}
-# @post_id = 9
+# @post_id = {{post.response.body.post.id}}
+@post_id = 1
 
 ### 
 # post.show
