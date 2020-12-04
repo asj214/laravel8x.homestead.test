@@ -13,6 +13,13 @@ use App\Models\Comment;
 class PostController extends Controller
 {
     private $transform = PostTransformer::class;
+    private $categories = [];
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => ['index']]);
+        $this->categories = config('constants.categories')[CATEGORY_POST];
+    }
 
     public function index(Request $request){
 

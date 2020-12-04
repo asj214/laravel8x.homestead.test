@@ -13,11 +13,13 @@ class BannerController extends Controller
 {
 
     private $transform = BannerTransformer::class;
+    private $categories = [];
 
     //
     public function __construct()
     {
         $this->middleware('auth:sanctum', ['except' => ['index']]);
+        $this->categories = config('constants.categories')[CATEGORY_BANNER];
     }
 
     public function index(Request $request) {
