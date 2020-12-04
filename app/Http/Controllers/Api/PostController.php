@@ -14,9 +14,16 @@ class PostController extends Controller
 {
     private $transform = PostTransformer::class;
 
-    public function index(){
-        $posts = Post::paginate(15);
+    public function index(Request $request){
+
+        $category_id = $request->input('category_id');
+
+        $posts = Post::when($category_id, function($query, $category_id){
+            return $query->where('category_id', $category_id);
+        })->paginate(15);
+
         return respond(collection($posts, $this->transform, 'posts'));
+
     }
 
     public function store(Request $request){
