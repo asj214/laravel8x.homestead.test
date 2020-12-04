@@ -29,6 +29,9 @@ cp .env.example .env
 # database migration
 artisan migrate
 
+# storage link
+artisan storage:link
+
 # node pacekage install
 npm install
 ```

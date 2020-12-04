@@ -9,6 +9,7 @@ class AttachmentTransformer extends TransformerAbstract
 {
     public function transform(Attachment $attach)
     {
+
         return [
             'id' => (int) $attach->id,
             'user_id' => (int) $attach->user_id,
@@ -19,5 +20,7 @@ class AttachmentTransformer extends TransformerAbstract
             'created_at' => $attach->created_at,
             'updated_at' => $attach->updated_at
         ];
+
     }
+
 }

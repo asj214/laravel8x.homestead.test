@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\AttachmentController;
 
 /*
@@ -43,5 +44,8 @@ Route::group(['middleware' => 'auth:sanctum'], function ($router) {
 
     # attachment
     Route::post('attachment', [AttachmentController::class, 'store']);
+
+    Route::get('banner', [BannerController::class, 'index']);
+    Route::post('banner', [BannerController::class, 'store']);
 
 });

@@ -124,3 +124,28 @@ Authorization: Bearer {{access_token}}
     "attachment_type": "posts",
     "attachment_id": {{post_id}}
 }
+
+
+###
+# banner.index
+GET {{BASE_URL}}/banner
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "category_id": 1
+}
+
+###
+# banner.store
+POST {{BASE_URL}}/banner
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "category_id": 1,
+    "title": "my test banner",
+    "link": "https://www.google.com/",
+    "description": "my teacher is google"
+}
+
