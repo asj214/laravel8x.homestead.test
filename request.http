@@ -46,6 +46,7 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {
+    "category_id": 2,
     "page": 1
 }
 
