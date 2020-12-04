@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -35,16 +34,10 @@ class Handler extends ExceptionHandler
     public function register()
     {
 
-        $this->renderable(function (RouteNotFoundException $e, $request) {
-            return respond_internal_error();
-        });
-
-        /*
         $this->reportable(function (Throwable $e) {
             //
             // var_dump($e);
         });
-        */
 
     }
 

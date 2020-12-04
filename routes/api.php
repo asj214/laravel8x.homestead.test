@@ -30,7 +30,7 @@ Route::prefix('auth')->group(function(){
     Route::get('me', [AuthController::class, 'me']);
 });
 
-Route::group(['middleware' => 'auth:sanctum'], function ($router) {
+Route::group(['middleware' => ['auth:sanctum']], function ($router) {
     # post
     Route::get('post', [PostController::class, 'index']);
     Route::post('post', [PostController::class, 'store']);
