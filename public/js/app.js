@@ -262,7 +262,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'NavBar'
 });
@@ -281,7 +280,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#app {\n  font-family: Avenir, Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n", ""]);
+exports.push([module.i, "\n#app {\r\n  font-family: Avenir, Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  color: #2c3e50;\n}\r\n", ""]);
 
 // exports
 
@@ -16966,8 +16965,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/sjahn/workspace/laravel8x.homestead.test/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/sjahn/workspace/laravel8x.homestead.test/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\workspace\laravel8x.homestead.test\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\workspace\laravel8x.homestead.test\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

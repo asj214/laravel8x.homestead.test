@@ -32,20 +32,20 @@ Route::prefix('auth')->group(function(){
 
 Route::group(['middleware' => ['auth:sanctum']], function ($router) {
     # post
-    Route::get('post', [PostController::class, 'index']);
-    Route::post('post', [PostController::class, 'store']);
-    Route::get('post/{id}', [PostController::class, 'show']);
-    Route::put('post/{id}', [PostController::class, 'update']);
-    Route::delete('post/{id}', [PostController::class, 'destroy']);
+    Route::get('posts', [PostController::class, 'index']);
+    Route::post('posts', [PostController::class, 'store']);
+    Route::get('posts/{id}', [PostController::class, 'show']);
+    Route::put('posts/{id}', [PostController::class, 'update']);
+    Route::delete('posts/{id}', [PostController::class, 'destroy']);
 
     # comment
-    Route::post('post/{id}/comment', [PostController::class, 'comment_store']);
-    Route::delete('post/{id}/comment/{comment_id}', [PostController::class, 'comment_destroy']);
+    Route::post('posts/{id}/comment', [PostController::class, 'comment_store']);
+    Route::delete('posts/{id}/comment/{comment_id}', [PostController::class, 'comment_destroy']);
 
     # attachment
-    Route::post('attachment', [AttachmentController::class, 'store']);
+    Route::post('attachments', [AttachmentController::class, 'store']);
 
-    Route::get('banner', [BannerController::class, 'index']);
-    Route::post('banner', [BannerController::class, 'store']);
+    Route::get('banners', [BannerController::class, 'index']);
+    Route::post('banners', [BannerController::class, 'store']);
 
 });

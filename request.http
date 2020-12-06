@@ -41,7 +41,7 @@ Authorization: Bearer {{access_token}}
 
 ###
 # post.index
-GET {{BASE_URL}}/post
+GET {{BASE_URL}}/posts
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -53,7 +53,7 @@ Authorization: Bearer {{access_token}}
 ###
 # post.store
 # @name post
-POST {{BASE_URL}}/post
+POST {{BASE_URL}}/posts
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -69,14 +69,14 @@ Authorization: Bearer {{access_token}}
 
 ### 
 # post.show
-GET {{BASE_URL}}/post/{{post_id}}
+GET {{BASE_URL}}/posts/{{post_id}}
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 
 ###
 # post.update
-PUT {{BASE_URL}}/post/{{post_id}}
+PUT {{BASE_URL}}/posts/{{post_id}}
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -88,7 +88,7 @@ Authorization: Bearer {{access_token}}
 
 ###
 # post.delete
-DELETE {{BASE_URL}}/post/{{post_id}}
+DELETE {{BASE_URL}}/posts/{{post_id}}
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -96,7 +96,7 @@ Authorization: Bearer {{access_token}}
 ### 
 # comment.create
 # @name comment
-POST {{BASE_URL}}/post/{{post_id}}/comment
+POST {{BASE_URL}}/posts/{{post_id}}/comment
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -109,14 +109,14 @@ Authorization: Bearer {{access_token}}
 
 ### 
 # comment.destroy
-DELETE {{BASE_URL}}/post/{{post_id}}/comment/{{comment_id}}
+DELETE {{BASE_URL}}/posts/{{post_id}}/comment/{{comment_id}}
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 
 ###
 # attachment.store
-POST {{BASE_URL}}/attachment
+POST {{BASE_URL}}/attachments
 Content-Type: multipart/form-data
 Authorization: Bearer {{access_token}}
 
@@ -129,7 +129,7 @@ Authorization: Bearer {{access_token}}
 
 ###
 # banner.index
-GET {{BASE_URL}}/banner
+GET {{BASE_URL}}/banners
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -139,7 +139,7 @@ Authorization: Bearer {{access_token}}
 
 ###
 # banner.store
-POST {{BASE_URL}}/banner
+POST {{BASE_URL}}/banners
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
