@@ -34,7 +34,7 @@ Authorization: Bearer {{access_token}}
 
 ###
 # auth.logout
-GET {{BASE_URL}}/auth/logout
+DELETE {{BASE_URL}}/auth/logout
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
@@ -96,7 +96,7 @@ Authorization: Bearer {{access_token}}
 ### 
 # comment.create
 # @name comment
-POST {{BASE_URL}}/posts/{{post_id}}/comment
+POST {{BASE_URL}}/posts/{{post_id}}/comments
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 

@@ -26,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('auth')->group(function(){
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
-    Route::get('logout', [AuthController::class, 'logout']);
+    Route::delete('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'me']);
 });
 
@@ -39,8 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], function ($router) {
     Route::delete('posts/{id}', [PostController::class, 'destroy']);
 
     # comment
-    Route::post('posts/{id}/comment', [PostController::class, 'comment_store']);
-    Route::delete('posts/{id}/comment/{comment_id}', [PostController::class, 'comment_destroy']);
+    Route::post('posts/{id}/comments', [PostController::class, 'comment_store']);
+    Route::delete('posts/{id}/comments/{comment_id}', [PostController::class, 'comment_destroy']);
 
     # attachment
     Route::post('attachments', [AttachmentController::class, 'store']);
