@@ -131,7 +131,7 @@ Authorization: Bearer {{access_token}}
 # banner.index
 GET {{BASE_URL}}/banners
 Content-Type: application/json
-Authorization: Bearer {{access_token}}
+# Authorization: Bearer {{access_token}}
 
 {
     "category_id": 1

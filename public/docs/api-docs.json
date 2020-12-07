@@ -122,6 +122,85 @@
                 ]
             }
         },
+        "/api/banners": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "category to filter by",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "type": "integer",
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "banners.index",
+                "tags": [
+                    "banners"
+                ]
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "category_id": {
+                                        "default": null,
+                                        "example": 1,
+                                        "type": "integer"
+                                    },
+                                    "title": {
+                                        "default": "",
+                                        "example": "hello laravel 8x api user",
+                                        "type": "string"
+                                    },
+                                    "link": {
+                                        "default": "",
+                                        "example": "http://www.park.net/minus-vel-qui-qui-aut.html",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "default": "",
+                                        "example": "T대학 병원을 향하고 달렸소. 내가 오랫동안 있던 동경, 청춘의 꿈 같은 기억이 있는 동경의 거리를 보는지 안 보는지 몰랐소. 내 가슴은 놀라움과 슬픔과 절망으로 찼던 것이오. T대학 병원 S내과 X호 병실이 정임의 병실이라는 것은 아까 키 큰 말이요, 한 필은 키 큰 여학생이 마음에 짚일 뿐이오. 생각해 보면 그 여학생이 일어나서 통통통 걸어간 지.",
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "summary": "banners.create",
+                "tags": [
+                    "banners"
+                ]
+            }
+        },
         "/api/posts": {
             "get": {
                 "security": [

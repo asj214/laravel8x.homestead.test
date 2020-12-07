@@ -45,7 +45,8 @@ Route::group(['middleware' => ['auth:sanctum']], function ($router) {
     # attachment
     Route::post('attachments', [AttachmentController::class, 'store']);
 
-    Route::get('banners', [BannerController::class, 'index']);
-    Route::post('banners', [BannerController::class, 'store']);
-
 });
+
+# banners.index 는 토큰 없어도 되게끔
+Route::get('banners', [BannerController::class, 'index']);
+Route::post('banners', [BannerController::class, 'store']);
