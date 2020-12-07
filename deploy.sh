@@ -1,3 +1,3 @@
-git pull origin master
+git pull
 composer install --optimize-autoloader --no-dev
-artisan migrate
+php artisan migrate
