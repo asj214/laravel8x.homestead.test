@@ -16,6 +16,7 @@ class PostTransformer extends TransformerAbstract
             'id' => (int) $post->id,
             'user_id' => (int) $post->user_id,
             'user' => null,
+            'category_id' => (int) $category_id,
             'title' => $post->title,
             'body' => $post->body,
             'attachments' => null,
