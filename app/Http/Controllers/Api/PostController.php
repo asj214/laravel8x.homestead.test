@@ -24,10 +24,11 @@ class PostController extends Controller
     public function index(Request $request){
 
         $category_id = $request->input('category_id');
+        $per_page = $request->input('per_page', 15);
 
         $posts = Post::when($category_id, function($query, $category_id){
             return $query->where('category_id', $category_id);
-        })->paginate(15);
+        })->paginate($per_page);
 
         return respond(collection($posts, $this->transform, 'posts'));
 
