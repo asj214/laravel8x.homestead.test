@@ -140,6 +140,14 @@
                         "required": false,
                         "type": "integer",
                         "default": 1
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "per_page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 5
                     }
                 ],
                 "responses": {
@@ -224,6 +232,14 @@
                         "required": false,
                         "type": "integer",
                         "default": 1
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "per_page",
+                        "required": false,
+                        "type": "integer",
+                        "default": 15
                     }
                 ],
                 "responses": {

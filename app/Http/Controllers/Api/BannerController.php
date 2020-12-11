@@ -31,7 +31,7 @@ class BannerController extends Controller
         if ($validate->fails()) return respond_invalid($validate->errors());
 
         $category_id = $request->input('category_id');
-        $per_page = $request->input('per_page', 15);
+        $per_page = $request->input('per_page', 5);
 
         $banners = Banner::where('category_id', $category_id)->paginate($per_page);
 
