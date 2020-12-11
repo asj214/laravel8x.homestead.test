@@ -14,7 +14,7 @@ class BannerTransformer extends TransformerAbstract
     {
         return [
             'id' => (int) $banner->id,
-            'category_id' => (int) $category_id,
+            'category_id' => (int) $banner->category_id,
             'title' => $banner->title,
             'link' => $banner->link,
             'description' => $banner->description,
