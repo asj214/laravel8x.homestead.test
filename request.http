@@ -150,3 +150,14 @@ Authorization: Bearer {{access_token}}
     "description": "my teacher is google"
 }
 
+###
+# post.like
+POST {{BASE_URL}}/posts/1/likes
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+###
+# post.unlike
+DELETE {{BASE_URL}}/posts/1/likes
+Content-Type: application/json
+Authorization: Bearer {{access_token}}

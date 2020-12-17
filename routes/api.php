@@ -45,6 +45,10 @@ Route::group(['middleware' => ['auth:sanctum']], function ($router) {
     # attachment
     Route::post('attachments', [AttachmentController::class, 'store']);
 
+    # like
+    Route::post('posts/{id}/likes', [PostController::class, 'like']);
+    Route::delete('posts/{id}/likes', [PostController::class, 'unlike']);
+
 });
 
 # banners.index 는 토큰 없어도 되게끔

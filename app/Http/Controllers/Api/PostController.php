@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Transformers\PostTransformer;
 use App\Models\Post;
+use App\Models\Like;
 use App\Models\Comment;
 
 
@@ -128,6 +129,54 @@ class PostController extends Controller
 
         $comment->delete();
         $post->decrement('comments_count');
+
+        return respond(item($post, $this->transform, 'post'));
+
+    }
+
+    public function like($id) {
+
+        if (Post::where('id', $id)->doesntExist()) {
+            return respond_forbidden();
+        }
+
+        $exists = Like::where([
+            ['likeable_type', '=', 'posts'],
+            ['likeable_id', '=', $id],
+            ['user_id', '=', auth()->user()->id]
+        ])->doesntExist();
+
+        $post = Post::find($id);
+
+        if ($exists) {
+            Like::insert([
+                'likeable_type' => 'posts',
+                'likeable_id' => $id,
+                'user_id' => auth()->user()->id
+            ]);
+            $post->increment('likes_count');
+        }
+
+        return respond(item($post, $this->transform, 'post'));
+
+    }
+
+    public function unlike($id) {
+
+        if (Post::where('id', $id)->doesntExist()) {
+            return respond_forbidden();
+        }
+
+        $post = Post::find($id);
+        $exists = Like::where([
+            ['likeable_type', '=', 'posts'],
+            ['likeable_id', '=', $id],
+            ['user_id', '=', auth()->user()->id]
+        ])->exists();
+
+        if ($exists) {
+            $post->decrement('likes_count');
+        }
 
         return respond(item($post, $this->transform, 'post'));
 
