@@ -99,16 +99,15 @@ class PostController extends Controller
 
         if ($validate->fails()) return respond_invalid($validate->errors());
 
-        $post = Post::find($id);
-
-        if ($post) {
+        if (Post::where('id', $id)->exists()) {
             $comment = new Comment;
             $comment->commentable_id = $id;
             $comment->commentable_type = 'posts';
             $comment->user_id = auth()->user()->id;
             $comment->body = $request->body;
             $comment->save();
-    
+
+            $post = Post::find($id);
             $post->increment('comments_count');
 
             return respond(item($post, $this->transform, 'post'));
@@ -121,62 +120,15 @@ class PostController extends Controller
 
     public function comment_destroy($id, $comment_id) {
 
-        $post = Post::find($id);
         $comment = Comment::find($comment_id);
 
-        if (!$post || !$comment) return respond_forbidden();
+        if (Post::where('id', $id)->doesntExist() || !$comment) return respond_forbidden();
         if ($comment->user_id != auth()->user()->id) return respond_unauthorized();
 
         $comment->delete();
+
+        $post = Post::find($id);
         $post->decrement('comments_count');
-
-        return respond(item($post, $this->transform, 'post'));
-
-    }
-
-    public function like($id) {
-
-        if (Post::where('id', $id)->doesntExist()) {
-            return respond_forbidden();
-        }
-
-        $exists = Like::where([
-            ['likeable_type', '=', 'posts'],
-            ['likeable_id', '=', $id],
-            ['user_id', '=', auth()->user()->id]
-        ])->doesntExist();
-
-        $post = Post::find($id);
-
-        if ($exists) {
-            Like::insert([
-                'likeable_type' => 'posts',
-                'likeable_id' => $id,
-                'user_id' => auth()->user()->id
-            ]);
-            $post->increment('likes_count');
-        }
-
-        return respond(item($post, $this->transform, 'post'));
-
-    }
-
-    public function unlike($id) {
-
-        if (Post::where('id', $id)->doesntExist()) {
-            return respond_forbidden();
-        }
-
-        $post = Post::find($id);
-        $exists = Like::where([
-            ['likeable_type', '=', 'posts'],
-            ['likeable_id', '=', $id],
-            ['user_id', '=', auth()->user()->id]
-        ])->exists();
-
-        if ($exists) {
-            $post->decrement('likes_count');
-        }
 
         return respond(item($post, $this->transform, 'post'));
 

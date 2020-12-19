@@ -94,13 +94,25 @@ Authorization: Bearer {{access_token}}
 
 
 ### 
+# comment.index
+GET {{BASE_URL}}/comments
+?commentable_type=posts
+&commentable_id=1
+&page=1
+&per_page=20
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+### 
 # comment.create
 # @name comment
-POST {{BASE_URL}}/posts/{{post_id}}/comments
+POST {{BASE_URL}}/comments
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {
+    "commentable_type": "posts",
+    "commentable_id": 2,
     "body": "my comment style is short!"
 }
 
@@ -151,13 +163,23 @@ Authorization: Bearer {{access_token}}
 }
 
 ###
-# post.like
-POST {{BASE_URL}}/posts/1/likes
+# like
+POST {{BASE_URL}}/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
+{
+    "likeable_type": "posts",
+    "likeable_id": 2
+}
+
 ###
 # post.unlike
-DELETE {{BASE_URL}}/posts/1/likes
+DELETE {{BASE_URL}}/likes
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
+
+{
+    "likeable_type": "posts",
+    "likeable_id": 1
+}

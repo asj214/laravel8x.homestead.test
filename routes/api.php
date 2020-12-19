@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\AttachmentController;
 
 /*
@@ -39,16 +41,18 @@ Route::group(['middleware' => ['auth:sanctum']], function ($router) {
     Route::delete('posts/{id}', [PostController::class, 'destroy']);
 
     # comment
-    Route::post('posts/{id}/comments', [PostController::class, 'comment_store']);
-    Route::delete('posts/{id}/comments/{comment_id}', [PostController::class, 'comment_destroy']);
+    // Route::post('posts/{id}/comments', [PostController::class, 'comment_store']);
+    // Route::delete('posts/{id}/comments/{comment_id}', [PostController::class, 'comment_destroy']);
+    Route::get('comments', [CommentController::class, 'index']);
+    Route::post('comments', [CommentController::class, 'store']);
+    Route::delete('comments/{id}', [CommentController::class, 'destroy']);
 
     # attachment
     Route::post('attachments', [AttachmentController::class, 'store']);
 
     # like
-    Route::post('posts/{id}/likes', [PostController::class, 'like']);
-    Route::delete('posts/{id}/likes', [PostController::class, 'unlike']);
-
+    Route::post('likes', [LikeController::class, 'store']);
+    Route::delete('likes', [LikeController::class, 'destroy']);
 });
 
 # banners.index 는 토큰 없어도 되게끔
