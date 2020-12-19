@@ -19,6 +19,7 @@ class CommentTransformer extends TransformerAbstract
             'user_id' => (int) $comment->user_id,
             'user' => null,
             'body' => $comment->body,
+            'likes_count' => (int) $comment->likes_count,
             'created_at' => $comment->created_at,
             'updated_at' => $comment->updated_at
         ];

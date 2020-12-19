@@ -41,6 +41,10 @@ class LikeController extends Controller
             \App\Models\Post::find($likeable_id)->increment('likes_count');
         }
 
+        if ($likeable_type == 'comments') {
+            \App\Models\Comment::find($likeable_id)->increment('likes_count');
+        }
+
         return respond_success();
 
     }
@@ -68,6 +72,10 @@ class LikeController extends Controller
 
         if ($likeable_type == 'posts') {
             \App\Models\Post::find($likeable_id)->decrement('likes_count');
+        }
+
+        if ($likeable_type == 'comments') {
+            \App\Models\Comment::find($likeable_id)->decrement('likes_count');
         }
 
         return respond_success();

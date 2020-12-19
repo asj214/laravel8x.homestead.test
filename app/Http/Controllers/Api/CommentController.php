@@ -22,7 +22,7 @@ class CommentController extends Controller
 
         $c_type = $request->input('commentable_type');
         $c_id = $request->input('commentable_id');
-        $per_page = $request->input('per_page', 15);
+        $per_page = $request->input('per_page', 100);
 
         $comments = Comment::where('commentable_type', $c_type)->where('commentable_id', $c_id)->paginate($per_page);
         
