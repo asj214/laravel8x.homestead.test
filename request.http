@@ -1,4 +1,5 @@
-@BASE_URL = http://laravel8x.homestead.test/api
+# @BASE_URL = http://laravel8x.homestead.test/api
+@BASE_URL = http://laravel-api.sjahn.gtz.kr/api
 
 ###
 # auth.register
